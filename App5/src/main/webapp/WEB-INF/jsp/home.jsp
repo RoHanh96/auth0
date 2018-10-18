@@ -1,6 +1,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -55,3 +54,20 @@
     </footer>
 
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $.growl({title: "Welcome  ${userId}", message: "We hope you enjoy using this site!"});
+    });
+    $("#qsLogoutBtn").click(function(e) {
+        e.preventDefault();
+        $("#home").removeClass("active");
+        $("#password-login").removeClass("active");
+        $("#qsLogoutBtn").addClass("active");
+        // assumes we are not part of SSO so just logout of local session
+        window.location = "${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, '')}/logout";
+    });
+</script>
+
+</body>
+</html>
